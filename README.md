@@ -5,7 +5,7 @@ n8n nodes for [ChatRail](https://www.chatrail.dev), a WhatsApp API for developer
 - **ChatRail**: send messages, look up a message's delivery status, check numbers and list your connected numbers.
 - **ChatRail Trigger**: start a workflow on WhatsApp events such as an incoming message, a delivery update or a number disconnecting. Every event is signature-checked.
 
-[Installation](#installation) · [Credentials](#credentials) · [Operations](#operations) · [Trigger](#trigger) · [Example workflows](#example-workflows) · [Compatibility](#compatibility) · [Resources](#resources)
+[Installation](#installation) · [Credentials](#credentials) · [Operations](#operations) · [Trigger](#trigger) · [Example workflows](#example-workflows) · [Troubleshooting](#troubleshooting) · [Compatibility](#compatibility) · [Resources](#resources)
 
 ## Installation
 
@@ -90,6 +90,14 @@ Each event has the same envelope:
 - **Clean a contact before sending:** **ChatRail → Number → Check**, then an IF node on `registered`.
 
 More patterns are in the [ChatRail n8n guide](https://www.chatrail.dev/integrations/n8n) and [tutorial](https://www.chatrail.dev/tutorials/n8n-whatsapp-workflow).
+
+## Troubleshooting
+
+- **The trigger never fires:** ChatRail can only deliver to a public HTTPS address. A self-hosted n8n on `localhost` or a private network won't receive events. Check the webhook endpoint the trigger created in the ChatRail dashboard, under Webhooks. Its delivery log shows each attempt and its response.
+- **Activating the trigger fails with 402:** limiting the trigger to one **Connection** needs a plan with more than one connection. Leave **Connection** empty to receive events from every number.
+- **Number checks return 429, or `reason: minute_limit` or `daily_limit`:** lookups are limited to protect your number (10 a minute, and 30 a day on Sandbox). Answers from the last 24 hours are reused and don't count, so wait and try again.
+- **A send returns 409:** the connection isn't ready, usually because the WhatsApp number needs pairing again. Re-pair it in the dashboard.
+- **401 or 403:** check the credential's API key and that it has the scopes listed under [Credentials](#credentials).
 
 ## Compatibility
 
