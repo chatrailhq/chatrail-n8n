@@ -13,7 +13,7 @@ export class ChatRailApi implements ICredentialType {
 
 	icon: Icon = { light: 'file:../icons/chatrail.svg', dark: 'file:../icons/chatrail.dark.svg' };
 
-	documentationUrl = 'https://github.com/chatrail/n8n-nodes-chatrail?tab=readme-ov-file#credentials';
+	documentationUrl = 'https://github.com/chatrailhq/chatrail-n8n?tab=readme-ov-file#credentials';
 
 	properties: INodeProperties[] = [
 		{

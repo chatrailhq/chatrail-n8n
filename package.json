@@ -17,7 +17,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/chatrail/n8n-nodes-chatrail.git"
+		"url": "https://github.com/chatrailhq/chatrail-n8n.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
