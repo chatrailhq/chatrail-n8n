@@ -89,6 +89,8 @@ Each event has the same envelope:
 - **Know when a number drops:** **ChatRail Trigger** on `connection.disconnected` sends you an alert, so you can re-pair before messages pile up.
 - **Clean a contact before sending:** **ChatRail → Number → Check**, then an IF node on `registered`.
 
+Two ready-to-import workflows are in [`examples/`](examples): one sends, checks and looks up messages, and one reacts to incoming events. In n8n, choose **Import from File**, then pick your ChatRail credential and connection in each node.
+
 More patterns are in the [ChatRail n8n guide](https://www.chatrail.dev/integrations/n8n) and [tutorial](https://www.chatrail.dev/tutorials/n8n-whatsapp-workflow).
 
 ## Troubleshooting

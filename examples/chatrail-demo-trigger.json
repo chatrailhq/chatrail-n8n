@@ -1,0 +1,72 @@
+{
+  "name": "ChatRail demo: react to incoming WhatsApp messages",
+  "nodes": [
+    {
+      "parameters": {
+        "events": [
+          "message.received",
+          "message.delivered",
+          "message.read"
+        ]
+      },
+      "id": "756a36b3-2091-4eb0-aeef-e48c268e2f94",
+      "name": "ChatRail Trigger",
+      "type": "n8n-nodes-chatrail.chatRailTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ],
+      "credentials": {
+        "chatRailApi": {
+          "id": "",
+          "name": "ChatRail account"
+        }
+      },
+      "webhookId": "cd58643f-3728-4bc5-87e3-9ce7c290fee3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "834ba01a-be80-49b3-8e30-289c21f1aa37",
+              "name": "event",
+              "value": "={{ $json.type }}",
+              "type": "string"
+            },
+            {
+              "id": "474f3f69-dd08-4a6f-8a95-7c599204a7ff",
+              "name": "message",
+              "value": "={{ $json.data }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a4d4d88d-7b59-4a8b-9785-0c8acbd1c3d3",
+      "name": "Keep the useful fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        260,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "ChatRail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Keep the useful fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {}
+}

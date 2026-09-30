@@ -1,0 +1,141 @@
+{
+  "name": "ChatRail demo: send, check and look up",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b4792a44-4cc9-4165-bda0-153321819a74",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "connection",
+        "operation": "getAll"
+      },
+      "id": "d06659f2-900a-45f1-bbce-a29aa9c5ed9c",
+      "name": "List connections",
+      "type": "n8n-nodes-chatrail.chatRail",
+      "typeVersion": 1,
+      "position": [
+        240,
+        100
+      ],
+      "credentials": {
+        "chatRailApi": {
+          "id": "",
+          "name": "ChatRail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "number",
+        "operation": "check",
+        "connection": "main",
+        "phones": "+923001234567, +2348031234567"
+      },
+      "id": "b2d71a1c-ea55-46a5-9669-a3cde78977d2",
+      "name": "Check numbers",
+      "type": "n8n-nodes-chatrail.chatRail",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ],
+      "credentials": {
+        "chatRailApi": {
+          "id": "",
+          "name": "ChatRail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "connection": "main",
+        "to": "+923001234567",
+        "body": "Your order CR-2048 is on its way with DHL. Reply here if you have any questions.",
+        "additionalFields": {
+          "context": "{\"order_id\": \"CR-2048\", \"carrier\": \"DHL\", \"eta\": \"Thursday\"}",
+          "metadata": "{\"source\": \"n8n-demo\"}"
+        }
+      },
+      "id": "cac2b3aa-9abf-4885-ab32-d1dae91aab65",
+      "name": "Send order update",
+      "type": "n8n-nodes-chatrail.chatRail",
+      "typeVersion": 1,
+      "position": [
+        240,
+        500
+      ],
+      "credentials": {
+        "chatRailApi": {
+          "id": "",
+          "name": "ChatRail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "get",
+        "messageId": "={{ $json.id }}"
+      },
+      "id": "504489db-fad5-404c-ab1e-ece3e2ad404c",
+      "name": "Get delivery status",
+      "type": "n8n-nodes-chatrail.chatRail",
+      "typeVersion": 1,
+      "position": [
+        480,
+        500
+      ],
+      "credentials": {
+        "chatRailApi": {
+          "id": "",
+          "name": "ChatRail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "List connections",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check numbers",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send order update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send order update": {
+      "main": [
+        [
+          {
+            "node": "Get delivery status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {}
+}
