@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-chatrail",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "n8n nodes for ChatRail: send WhatsApp messages, check numbers and trigger workflows from WhatsApp events.",
 	"license": "MIT",
 	"homepage": "https://www.chatrail.dev/integrations/n8n",
