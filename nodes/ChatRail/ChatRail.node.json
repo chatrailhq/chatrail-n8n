@@ -1,0 +1,21 @@
+{
+	"node": "n8n-nodes-chatrail.chatRail",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Communication",
+		"Marketing"
+	],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/chatrail/n8n-nodes-chatrail?tab=readme-ov-file#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/chatrail/n8n-nodes-chatrail?tab=readme-ov-file"
+			}
+		]
+	}
+}
